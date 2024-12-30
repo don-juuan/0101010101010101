@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue dans la Matrix</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: black;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Animation de la Matrix */
+        .matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .matrix div {
+            position: absolute;
+            top: 0;
+            width: 10px;
+            height: 100%;
+            background: linear-gradient(to bottom, #00ff00, transparent);
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        @keyframes delay {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .matrix div:nth-child(even) { animation-duration: 3s; }
+        .matrix div:nth-child(odd) { animation-duration: 5s; }
+
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            color: #00ff00;
+            background: black;
+            border: 2px solid #00ff00;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00ff00;
+            color: black;
+        }
+
+        .info {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Effet Matrix -->
+    <div class="matrix">
+        <div style="left: 10%;"></div>
+        <div style="left: 30%;"></div>
+        <div style="left: 50%;"></div>
+        <div style="left: 70%;"></div>
+        <div style="left: 90%;"></div>
+    </div>
+
+    <h1>Bienvenue dans la Matrix</h1>
+    <button id="infoButton">Informations</button>
+    <div class="info" id="infoText">
+        18/01 12H, 1 rue des Vosges, Herrlisheim
+    </div>
+
+    <audio id="audio" src="ROBTVox_Langage machine (ID 0335)_LS.mp3"></audio>
+
+    <script>
+        // Démarrage audio et affichage des infos
+        const button = document.getElementById('infoButton');
+        const info = document.getElementById('infoText');
+        const audio = document.getElementById('audio');
+
+        button.addEventListener('click', () => {
+            audio.play();
+            info.style.display = 'block';
+        });
+
+        // Création des colonnes d'effet Matrix
+        const matrix = document.querySelector('.matrix');
+        for (let i = 0; i < 50; i++) {
+            const column = document.createElement('div');
+            column.style.left = `${i * 2}%`;
+            matrix.appendChild(column);
+        }
+    </script>
+</body>
+</html>
